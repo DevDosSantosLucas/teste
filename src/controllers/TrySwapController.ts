@@ -58,7 +58,12 @@ class TrySwapController {
             const swapRepository =getRepository(Item);
             const swaps = await swapRepository.findOneOrFail( item_id);
 
-            return response.status(201).json({swaps});
+
+            const item = await swapRepository.findOneOrFail( item_id, {
+                relations: ['items']
+              } );
+
+            return response.status(201).json({swaps,item});
 
     }
 }

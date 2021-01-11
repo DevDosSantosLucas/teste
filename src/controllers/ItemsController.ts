@@ -6,31 +6,32 @@ import Item from '../models/Item';
 import ItemsView from '../views/ItemView';
 
 export default {
-  async index(request: Request, response: Response){
+  async show(request: Request, response: Response){
     const itemsRepository = getRepository(Item);
 
     const items = await itemsRepository.find({
-      relations: ['images']
+      relations: ['images','user_id']//relacionar para mostrar usuario
     });
-
+    console.log(items)
     return response.status(200).json(ItemsView.renderMany(items));
   },
 
-  async show(request: Request, response: Response){
+  async index(request: Request, response: Response){
     const { item_id } = request.params;
     const itemsRepository = getRepository(Item);
 
     const item = await itemsRepository.findOneOrFail( item_id, {
-      relations: ['images','users']
+      relations: ['images']
     } );
 
+    console.log(item)
     return response.status(200).json(ItemsView.render(item));
     // return response.status(200).json(item);
 
   },
 
   async create(request: Request, response: Response){
-    const { name_item, price, description, category, user_id} = request.body;
+    const { item_id , name_item, price, description, category, user_id} = request.body;
 
     
   
@@ -42,6 +43,7 @@ export default {
     })
   
     const item = {
+        item_id,
         name_item,
         price,
         description,

@@ -3,7 +3,7 @@ import Image from "../models/Image";
 export default {
   render(image: Image) {
     return{
-      id: image.id,
+      image_id: image.image_id,
       url:`http://localhost:3333/uploads/${image.path}`
     };
   },

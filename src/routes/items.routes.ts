@@ -10,16 +10,18 @@ import JWT from "../middleware/JWT";
     const routes = Router();
     const upload = multer(uploadConfig);
 
-    routes.use(JWT);
+    // routes.use(JWT);
     
 
-    routes.get('/show',  ItemController.index,JWT)
-          .post('/create', upload.array('images'), ItemController.create,JWT)
+    routes.get('/index/:item_id',  ItemController.index)//,JWT)
+          .get('/show/',  ItemController.show)//,JWT)
+
+          .post('/create', upload.array('images'), ItemController.create)//,JWT)
           // .put('/update/:item_id', ItemController.update,JWT)
           // .delete('/delete/:item_id', ItemController.delete,JWT)
 
-          .post('/:targed_item_id/tryswap',TrySwapController.trySwap,JWT)
-          .get('/showSwap/:item_id',TrySwapController.showSwap,JWT)
+          .post('/:targed_item_id/tryswap',TrySwapController.trySwap)//,JWT)
+          .get('/showSwap/:item_id',TrySwapController.showSwap)//,JWT)
 
         //   .post('/image', upload.array('images'), TrySwapController.create);
     

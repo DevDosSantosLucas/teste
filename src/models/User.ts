@@ -1,8 +1,10 @@
 import { Entity, Column, PrimaryGeneratedColumn, 
-         OneToMany, JoinColumn ,
+         OneToOne, JoinColumn ,
          BeforeInsert, BeforeUpdate} from 'typeorm';
 
 import bcrypt from 'bcryptjs';
+
+import Item from './Item'
 
 @Entity('users')
 export default class User {
@@ -34,7 +36,8 @@ export default class User {
   //   this.password = bcrypt.hashSync(this.password,8)
   // }
 
-  
-   
+  @OneToOne(() => Item, item => item.user_id) // specify inverse side as a second parameter
+  @JoinColumn({name: 'user_id'})
+  item: Item[];
 
 }

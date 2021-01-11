@@ -14,6 +14,18 @@ import userView from '../views/UserView';
 
 
 class UserController{ 
+
+async show(request: Request, response: Response){
+  const { user_id } = request.params;
+  const usersRepository = getRepository(User);
+
+  const user = await usersRepository.find( {user_id});
+  console.log(user)
+  // return response.status(200).json(userView.render(user));
+  return response.status(200).json(user);
+
+}
+
 async create(request: Request, response: Response){
     const {user_id, name, password, city, uf, whatsapp ,passwordConfirmation} = request.body;
 
@@ -81,12 +93,12 @@ async auth(request: Request, response: Response){
         }
 
  
-    const isValidPassword = await bcrypt.compare(password,user.password);
-      if (!isValidPassword)  {
-        console.log('teste')
-        console.log(isValidPassword)
-          return response.status(401).json('password don\'t authenticated') 
-      }  
+    // const isValidPassword = await bcrypt.compare(password,user.password);
+    //   if (!isValidPassword)  {
+    //     console.log('teste')
+    //     console.log(isValidPassword)
+    //       return response.status(401).json('password don\'t authenticated') 
+    //   }  
            //fazer criptografia
     // const token = sign({id: user.user_id}, 'secret', {expiresIn:'1d'
     
@@ -104,7 +116,7 @@ async auth(request: Request, response: Response){
      abortEarly: false, //Se encontrar um erro, por padrão retorna um erro retornando todos ao mesmo tempo;
    })
 
-    return response.status(201).json({user,/*token*/});
+    return response.status(201).json({users/*,token*/});
     }
     
 }

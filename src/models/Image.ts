@@ -5,7 +5,7 @@ import Item from './Item';
 @Entity('images')
 export default class Image {
   @PrimaryGeneratedColumn('increment')
-  id: number;
+  image_id: number;
 
   @Column()
   path: string;

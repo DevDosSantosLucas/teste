@@ -12,12 +12,16 @@ import JWT from "../middleware/JWT";
 
 
 
-    routes.use(JWT);
+    // routes.use(JWT);
 
     routes
-        .get('/show/:user_id', UserController.show,JWT)
+        // .get('/show/:user_id', UserController.show,JWT)
         // .put('/update/:userId', UserController.update,JWT)
         // .delete('/delete/:userId', UserController.delete,JWT)
+
+        .get('/show/:user_id', UserController.show)
+        // .put('/update/:userId', UserController.update)
+        // .delete('/delete/:userId', UserController.delete)
 
 
 

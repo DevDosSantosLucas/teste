@@ -34,7 +34,7 @@ export class CreateItemTable1609646540494 implements MigrationInterface {
           },
           {
             name: 'user_id',
-            type: 'integer'
+            type: 'uuid'
           }
         ],
         foreignKeys: [

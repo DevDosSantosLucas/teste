@@ -1,4 +1,5 @@
 import Item from "../models/Item";
+import User from "../models/User";
 import imagesView from "./ImagesView";
 import userView from "./UserView";
 
@@ -10,13 +11,18 @@ export default {
       price: item.price,
       description: item.description,
       category: item.category,
-      user: item.user_id,   // precisa mostrar todas ifos do user
-    //   user_id: userView.renderMany(item.user_id),
+      user_id: item.user_id,   // precisa mostrar todas infos do user
+      // user: userView.render(item.user_id),
       images: imagesView.renderMany(item.images)
     };
   },
   
   renderMany(items: Item[]) {
     return items.map(item => this.render(item));
-  }
+  },
+
+  // render(user :User){
+  //   return user
+  // }
+  
 }
