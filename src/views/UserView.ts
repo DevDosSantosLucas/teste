@@ -9,7 +9,7 @@ export default {
       city: user.city,
       uf: user.uf,
       whatsapp: `https://api.whatsapp.com/send?phone=${user.whatsapp}`,
-      avatar: user.avatar,
+      avatar: `http://localhost:3333/uploads/${user.avatar}`,
     };
   },
 

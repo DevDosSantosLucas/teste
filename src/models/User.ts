@@ -36,8 +36,12 @@ export default class User {
   //   this.password = bcrypt.hashSync(this.password,8)
   // }
 
-  @OneToOne(() => Item, item => item.user_id) // specify inverse side as a second parameter
-  @JoinColumn({name: 'user_id'})
-  item: Item[];
+  // @OneToOne(() => Item, item => item.user_id) // specify inverse side as a second parameter
+  // @JoinColumn({name: 'user_id'})
+  // item: Item[];
+  
+  @OneToOne(type=>Item, user=>User)
+  @JoinColumn({name:'user_id'})
+  item: Item;
 
 }

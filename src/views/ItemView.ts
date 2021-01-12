@@ -11,8 +11,7 @@ export default {
       price: item.price,
       description: item.description,
       category: item.category,
-      user_id: item.user_id,   // precisa mostrar todas infos do user
-      // user: userView.render(item.user_id),
+      user_id: item.user_id, 
       images: imagesView.renderMany(item.images)
     };
   },
@@ -20,9 +19,5 @@ export default {
   renderMany(items: Item[]) {
     return items.map(item => this.render(item));
   },
-
-  // render(user :User){
-  //   return user
-  // }
   
 }

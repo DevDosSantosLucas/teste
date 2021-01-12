@@ -1,41 +1,32 @@
 import { Request, Response } from 'express';
 import { getRepository } from 'typeorm';
-import * as Yup from 'yup';
 
-import Item from '../models/Item';
-import ItemsView from '../views/ItemView';
+import Swap from '../models/Swap';
 
+// interface ItemId {
+//     item_id: string;
+//   }
+  
 class TrySwapController {
 
     async trySwap(request: Request, response: Response){
-
+            
             const { targed_item_id } = request.params;
-            const { item_id } = request.body;
+            const { item_id } = request.body.item_id;
 
-            console.log(targed_item_id)
-            console.log(item_id)
+            // console.log(targed_item_id)
+            // console.log(item_id)
 
                    
     
   
-    const swapRepository =getRepository(Item);
+    const swapRepository =getRepository(Swap);
 
     const swap ={
         targed_item_id,
-        item_id
-
+        item_id,
     }
 
-    const schema = Yup.object().shape({
-        targed_item_id: Yup.number().required(),
-        item_id: Yup.number().required().integer(),
-      
-    });
-
-    
-    await schema.validate(swap, {
-      abortEarly: false, //Se encontrar um erro, por padrão retorna um erro retornando todos ao mesmo tempo;
-    })
 
     const newSwap = swapRepository.create(swap);
   
@@ -55,15 +46,18 @@ class TrySwapController {
     async showSwap(request: Request, response: Response){
     
             const { item_id } = request.params;
-            const swapRepository =getRepository(Item);
-            const swaps = await swapRepository.findOneOrFail( item_id);
-
-
-            const item = await swapRepository.findOneOrFail( item_id, {
-                relations: ['items']
-              } );
-
-            return response.status(201).json({swaps,item});
+            const swapRepository =getRepository(Swap);
+    
+            // const item = await swapRepository.find( {
+            //     relations: ["item_id","targed_item_id"] 
+            //   } );
+              const item = await swapRepository.findOneOrFail({ 
+                relations: [ "item_id", "targed_item_id" ] ,// falta mostrar todas a s infos dos Items
+                where: { item_id},
+                }
+               );
+              console.log(item)
+            return response.status(201).json(item);
 
     }
 }

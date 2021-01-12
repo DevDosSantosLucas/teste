@@ -22,6 +22,8 @@ import JWT from "../middleware/JWT";
 
           .post('/:targed_item_id/tryswap',TrySwapController.trySwap)//,JWT)
           .get('/showSwap/:item_id',TrySwapController.showSwap)//,JWT)
+          // .get('/showSwap/',TrySwapController.showSwap)//,JWT)
+
 
         //   .post('/image', upload.array('images'), TrySwapController.create);
     

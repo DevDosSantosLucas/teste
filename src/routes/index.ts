@@ -14,7 +14,7 @@ import ItemController from"./items.routes"
 
     routes.use("/auth", UserControllerJwt);
     routes.use("/items",ItemController)
-    routes.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')));
+    routes.use('/uploads', express.static(path.join(__dirname, '..','..', 'uploads')));
 
     routes
         .post('/signup',upload.single('avatar'), UserController.create)

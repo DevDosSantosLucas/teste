@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { getRepository ,getManager, ObjectID  } from 'typeorm';
+import { getRepository } from 'typeorm';
 import * as Yup from 'yup';
 
 // import AppError from "../errors/AppErrors"
@@ -19,10 +19,10 @@ async show(request: Request, response: Response){
   const { user_id } = request.params;
   const usersRepository = getRepository(User);
 
-  const user = await usersRepository.find( {user_id});
+  const user = await usersRepository.findOne( {user_id});
   console.log(user)
-  // return response.status(200).json(userView.render(user));
-  return response.status(200).json(user);
+  return response.status(200).json(userView.render(user));
+  // return response.status(200).json(user);
 
 }
 

@@ -21,9 +21,9 @@ export default {
     const itemsRepository = getRepository(Item);
 
     const item = await itemsRepository.findOneOrFail( item_id, {
-      relations: ['images']
+      relations: ["images","user_id"]
     } );
-
+    
     console.log(item)
     return response.status(200).json(ItemsView.render(item));
     // return response.status(200).json(item);
