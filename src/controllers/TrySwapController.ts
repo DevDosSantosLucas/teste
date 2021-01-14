@@ -16,7 +16,7 @@ class TrySwapController {
      
             
             const { targed_item_id } = request.params ;//as ItemId ;
-            const { item_id } = request.body.item_id ; //as ItemId ;
+            const { item_id } = request.body ;//as ItemId ;
               
 
             // console.log(targed_item_id)
@@ -32,13 +32,10 @@ class TrySwapController {
         item_id,
     }
 
-    const item = await swapRepository.findOneOrFail({ where: { item_id} }  );
+    const item = await swapRepository.findOne({ where: { item_id,targed_item_id} }  );
     if(item) return response.status(201).json("Item ja inserido ");
 
-    const newSwap = swapRepository.create({
-      targed_item_id,
-      item_id,
-    });
+    const newSwap = swapRepository.create(swap);
     
     // delete item_id.user_id.password
   
@@ -50,7 +47,9 @@ class TrySwapController {
     }] });
     if( targedItem){
         console.log('FULANO TAMBÉM SE INTERESSOU PELO SEU PRODUTO. QUE TAL FINALIZAR UMA TROCA?')
-    }
+    } 
+
+    console.log(swap)
     
     return response.status(201).json(newSwap);
   }
@@ -71,6 +70,7 @@ class TrySwapController {
                );
               
               //  delete item.item_id.user_id.password
+              console.log(item)
             
             return response.status(201).json(SwapView.render(item));
             
