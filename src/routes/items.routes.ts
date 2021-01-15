@@ -20,7 +20,7 @@ import JWT from "../middleware/JWT";
           // .put('/update/:item_id', ItemController.update,JWT)
           // .delete('/delete/:item_id', ItemController.delete,JWT)
 
-          .post('/:targed_item_id/tryswap',TrySwapController.trySwap)//,JWT)
+          .post('/tryswap',TrySwapController.trySwap)//,JWT)
           .get('/showSwap/:item_id',TrySwapController.showSwap)//,JWT)
           // .get('/showSwap/',TrySwapController.showSwap)//,JWT)
 

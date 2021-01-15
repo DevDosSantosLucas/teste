@@ -15,8 +15,8 @@ class TrySwapController {
     async trySwap(request: Request, response: Response){
      
             
-            const { targed_item_id } = request.params ;//as ItemId ;
-            const { item_id } = request.body ;//as ItemId ;
+            // const { targed_item_id } = request.params ;//as ItemId ;
+            const { item_id ,targed_item_id} = request.body ;//as ItemId ;
               
 
             // console.log(targed_item_id)
@@ -35,11 +35,11 @@ class TrySwapController {
     const item = await swapRepository.findOne({ where: { item_id,targed_item_id} }  );
     if(item) return response.status(201).json("Item ja inserido ");
 
-    const newSwap = swapRepository.create(swap);
+    const newSwap = swapRepository.create({targed_item_id});
     
     // delete item_id.user_id.password
   
-    await swapRepository.save(swap);
+    await swapRepository.save({targed_item_id});
 
     const targedItem =await swapRepository.findOne({where:[{
         'item_id':targed_item_id,
@@ -69,7 +69,7 @@ class TrySwapController {
                 
                );
               
-              //  delete item.item_id.user_id.password
+              
               console.log(item)
             
             return response.status(201).json(SwapView.render(item));
