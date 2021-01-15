@@ -19,7 +19,7 @@ async show(request: Request, response: Response){
   const { user_id } = request.params;
   const usersRepository = getRepository(User);
 
-  const user = await usersRepository.findOne( {user_id});
+  const user = await usersRepository.findOne( {where:{user_id}});
   console.log(user)
   return response.status(200).json(userView.render(user));
   // return response.status(200).json(user);
